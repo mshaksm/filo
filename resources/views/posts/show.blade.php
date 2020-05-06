@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class = "float-right"><a href="/posts" class="btn btn-warning">Go Back</a></div>
+<div class = "float-right"><a href="{{ url('posts') }}" class="btn btn-warning">Go Back</a></div>
 
 <h1>{{$post->title}}</h1>
 <div class ="card">
