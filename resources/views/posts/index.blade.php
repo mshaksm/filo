@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-4">
                         <br>
-                        <img style="width:110px" src="/storage/c_image/{{$post->c_image}}">
+                        <img style="width:110px" src="{{$post->c_image}}">
                         <br>
                         <br>
                     </div>

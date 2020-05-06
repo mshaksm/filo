@@ -8,7 +8,7 @@
 <div class ="card">
     <div style="width:100%; text-align:center">
     <br/>
-<img style="width:30%" src="/storage/c_image/{{$post->c_image}}">
+<img style="width:30%" src="{{$post->c_image}}">
 <br>
 <br>
     </div>

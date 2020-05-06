@@ -5,7 +5,7 @@
 <!--Display post title-->
 <h1>{{$requests->post->title}}</h1>
 <hr>
-<a href="/requests" class="btn btn-warning">Back</a>
+<a href="{{ url('requests') }}" class="btn btn-warning">Back</a>
 <br><br>
 <h4>Requested by {{$requests->user->name}}</h4>
 <br>

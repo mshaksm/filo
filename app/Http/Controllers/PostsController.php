@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Post;
+use Illuminate\Support\Facades\URL;
 
 
 class PostsController extends Controller
@@ -53,7 +54,20 @@ class PostsController extends Controller
             'body' => 'required',
             'c_image' => 'image|nullable|max:1999'
         ]);
-        //handle upload from file
+
+           // This if statement is used to check if there is a post image
+           if($request->hasFile('c_image')){
+
+            $file = $request->file('c_image');
+            $extension = $file->getClientOriginalExtension();
+            $file->move(public_path(). '/c_image', $file->getClientOriginalName());
+            $url = URL::to("/").'/c_image'. '/' . $file->getClientOriginalName();
+        }
+        else{
+            $url = 'noimage.jpg';
+        }
+
+        /* //handle upload from file
         if($request->hasFile('c_image')){
             // Get the filename with extension
             $fileNameExtension = $request->file('c_image')->getClientOriginalName();
@@ -69,14 +83,14 @@ class PostsController extends Controller
 
         }else{
             $fileNameToStore = 'noimage.jpg';
-        }
+        } */
 
         // create post
         $post = new Post;
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->user_id = auth()->user()->id;
-        $post->c_image = $fileNameToStore;
+        $post->c_image = $url;
         $post->save();
 
        return redirect()->route('posts')->with('success', 'Post Created');
@@ -129,21 +143,17 @@ class PostsController extends Controller
             'c_image' => 'image|nullable|max:1999'
         ]);
 
-        //handle upload from file
+        // This if statement is used to check if there is a post image
         if($request->hasFile('c_image')){
-            // Get the filename with extension
-            $fileNameExtension = $request->file('c_image')->getClientOriginalName();
-            // Get only file name
-            $fileName = pathinfo($fileNameExtension, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('c_image')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            //Upload Image
-            $path = $request->file('c_image')->storeAs('public/c_image', $fileNameToStore);
 
-
-        }            
+            $file = $request->file('c_image');
+            $extension = $file->getClientOriginalExtension();
+            $file->move(public_path(). '/c_image', $file->getClientOriginalName());
+            $url = URL::to("/").'/c_image'. '/' . $file->getClientOriginalName();
+        }
+        else{
+            $url = 'noimage.jpg';
+        }      
 
         
 
@@ -152,7 +162,7 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         if($request->hasFile('c_image')){
-            $post->c_image = $fileNameToStore;
+            $post->c_image = $url;
         }
         $post->save();
 
@@ -175,16 +185,6 @@ class PostsController extends Controller
         if(auth()->user()->id !==$post->user_id){
             return redirect('/posts')->with('error', 'Access denied');
         }
-
-        if($post->cover_image != 'noimage.jpg'){
-            // delete
-            Storage::delete('public/c_image/'.$post->c_image);
-
-
-
-        }
-
-        
 
         $post->delete();
         return redirect('/posts')->with('success', 'Post Removed');

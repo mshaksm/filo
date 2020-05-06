@@ -14,13 +14,13 @@
         <br>
         @if(Auth::guest())
         <p><b>Please login for full user experience</b></p>
-        <p><a class="btn btn-primary btn-lg" href="/login" role="button">Login</a> <a class="btn btn-success btn-lg" href="/register" role="button">Register</a></p>
+<p><a class="btn btn-primary btn-lg" href="{{url('login')}}" role="button">Login</a> <a class="btn btn-success btn-lg" href="{{ url('register') }}" role="button">Register</a></p>
 
           @elseif(Auth::user())
             <h4><b>Hurray! {{ Auth::user()->name }} You've Logged in!</b></h4>
           
             <br>
-            <p><a class="btn btn-primary btn-lg" href="../dashboard" role="button">Go To Dashboard</a>
+            <p><a class="btn btn-primary btn-lg" href="{{ url('dashboard') }}" role="button">Go To Dashboard</a>
           
         @endif
 
