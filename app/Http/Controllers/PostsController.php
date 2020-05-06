@@ -169,7 +169,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = post::find($id);
+        $post = Post::find($id);
 
         // Check the user matches otherwise display error and redirect to posts page
         if(auth()->user()->id !==$post->user_id){

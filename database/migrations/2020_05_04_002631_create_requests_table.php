@@ -21,7 +21,7 @@ class CreateRequestsTable extends Migration
             $table->timestamps();
             $table->enum('status', ['Pending', 'Accepted', 'Refused'])->default('Pending');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

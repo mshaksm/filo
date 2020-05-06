@@ -29,7 +29,7 @@
 @if(!Auth::guest())
 {{--}}This will prevent other users from seeing the edit and delete buttons{{--}}    
 @if(Auth::user()->id == $post->user_id)
-   <a href="/posts/{{$post->id}}/edit" class="btn btn-info">Edit</a>
+   <a href="{{url("edit/{$post->id}")}}" class="btn btn-info">Edit</a>
     <div class = "float-right">
     {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
     {{form::hidden('_method', 'DELETE')}}

@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="col-md-8 col-sm-8">
-                        <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
+                        <h3><a href="{{url("show/{$post->id}")}}" >{{$post->title}}</a></h3>
                         <small>Written on {{$post->created_at}}</small>
                         @if(!Auth::guest())
                             @if(Auth::user()->id != $post->user_id)

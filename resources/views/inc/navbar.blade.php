@@ -8,7 +8,6 @@
 
                     
                     <!-- Left Side Of Navbar -->
-                    
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/about')}}">About</a>
@@ -16,9 +15,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('posts')}}">Found Lost Items</a>
                         </li>
+                        @if(Auth::check() && !Auth::user()->role)
                         <li class=>
                             <a class="nav-link" href="{{route('create')}}">Create Post</a>
                         </li>
+                        @endif
                         
                         @if(!Auth::guest())
                         <!-- If user is an admin, they are allowed to view requests -->

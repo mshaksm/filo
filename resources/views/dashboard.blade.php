@@ -15,10 +15,10 @@
 
                     You're logged in!
                 </div>
-                
+                @if(Auth::check() && !Auth::user()->role)
                 <div class="panel-body">
                     <div class = "float-right">
-                    <a href="/posts/create" class="btn btn-dark">Create a Post</a>
+                    <a href="{{route('create')}}" class="btn btn-dark">Create a Post</a>
                     </div>
                     <br>
                     <br>
@@ -34,7 +34,7 @@
                             @foreach($posts as $post)
                                 <tr>
                                     <td>{{$post->title}}</td>
-                                    <td><a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Edit</a></td>
+                                    <td><a href="{{url("edit/{$post->id}")}}" class="btn btn-primary">Edit</a></td>
                                     <td>
                                         {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                                             {{Form::hidden('_method', 'DELETE')}}
@@ -47,7 +47,7 @@
                     @else
                         <p>You have no posts</p>
                     @endif
-                
+                    @endif
             </div>
             </div>
         </div>

@@ -23,7 +23,7 @@
                                 <p>{{$request->user->name}}</p>
                             </td>
                             <td>
-                                <a href="/requests/{{$request->id}}">{{$request->post->title}}</a>
+                                <a href="#">{{$request->post->title}}</a>
                             </td>
                             <td>
                                 <!-- clicking this approves the request and request id is needed so that it can be deleted after approval -->
